@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>unoparatodos — apps gratuitas con datos públicos</title>
+<meta name="description" content="Apps web gratuitas, sin anuncios, sin registro y sin rastro, hechas con datos públicos citados y código abierto. No deciden por ti: te dan los datos para que decidas.">
+<meta name="theme-color" content="#111111">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="canonical" href="https://unoparatodos.netlify.app/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="unoparatodos">
+<meta property="og:title" content="unoparatodos">
+<meta property="og:description" content="Apps gratuitas, sin anuncios y sin rastro, con datos públicos citados. No deciden por ti.">
+<meta property="og:url" content="https://unoparatodos.netlify.app/">
+<meta property="og:image" content="https://unoparatodos.netlify.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="author" content="unoparatodos">
+<style>
+@font-face{font-family:'Archivo';src:url('/fonts/archivo.woff') format('woff');font-weight:500 900;font-stretch:100% 125%;font-display:swap}
+@font-face{font-family:'Public Sans';src:url('/fonts/publicsans.woff') format('woff');font-weight:400 800;font-display:swap}
+/* Mismo sistema que ATRÉVETE 29-N: neutros puros, sin tono. Claro y oscuro según el sistema. */
+:root{
+  --bg:#EDEDED; --surface:#FFFFFF; --ink:#111111; --muted:#595959; --line:#D4D4D4; --tint:#E4E4E4;
+  --hero:#111111; --on-hero:#FFFFFF; --on-hero-muted:#BDBDBD;
+  --display:'Archivo','Arial Narrow',system-ui,sans-serif;
+  --body:'Public Sans','Segoe UI',system-ui,sans-serif;
+  --r:22px;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E0E0E; --surface:#1B1B1B; --ink:#F2F2F2; --muted:#A8A8A8; --line:#333333; --tint:#2A2A2A;
+  --hero:#F2F2F2; --on-hero:#111111; --on-hero-muted:#4A4A4A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E0E0E; --surface:#1B1B1B; --ink:#F2F2F2; --muted:#A8A8A8; --line:#333333; --tint:#2A2A2A;
+  --hero:#F2F2F2; --on-hero:#111111; --on-hero-muted:#4A4A4A; color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance;font-weight:800;letter-spacing:-.01em;line-height:1.1}
+p{margin:0}
+a{color:var(--ink);font-weight:700;text-underline-offset:3px;text-decoration-thickness:2px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+.skip{position:absolute;left:-9999px;top:8px;background:var(--ink);color:var(--surface);padding:10px 14px;border-radius:10px;z-index:9}
+.skip:focus{left:16px}
+
+.wrap{max-width:760px;margin:0 auto;padding:20px 16px 40px;display:flex;flex-direction:column;gap:28px}
+section{display:flex;flex-direction:column;gap:16px;scroll-margin-top:16px}
+.sec-h{display:flex;flex-direction:column;gap:8px;padding-top:14px;border-top:2px solid var(--ink)}
+.sec-h h2{font-size:clamp(26px,6vw,32px)}
+.sec-h p{font-size:17px;color:var(--muted);max-width:60ch}
+
+/* Marca */
+.wm{display:inline-flex;align-items:center;gap:.42em;font-family:var(--display);font-weight:900;font-stretch:118%;letter-spacing:-.03em;line-height:1;white-space:nowrap;text-decoration:none}
+.wm svg{width:1.05em;height:1.05em;flex:0 0 auto}
+.wm .u{color:currentColor}.wm .pt{color:var(--muted)}
+.wm .hole{fill:var(--bg)}.hero .wm .hole{fill:var(--hero)}
+.hero .wm .pt{color:var(--on-hero-muted)}
+
+/* Cabecera */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.top .wm{font-size:26px}
+nav{display:flex;gap:2px;flex-wrap:wrap;margin-left:-10px}
+nav a{font-size:13px;font-weight:800;text-decoration:none;padding:9px 10px;border-radius:999px;min-height:40px;display:inline-flex;align-items:center;white-space:nowrap}
+@media (min-width:640px){nav{gap:4px;margin-left:0}nav a{font-size:14px;padding:9px 12px}}
+nav a:hover{background:var(--surface)}
+
+/* Portada */
+.hero{background:var(--hero);color:var(--on-hero);border-radius:28px;padding:30px 24px 26px;display:flex;flex-direction:column;gap:18px}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--on-hero-muted)}
+.hero h1{font-size:clamp(34px,8.6vw,54px);letter-spacing:-.02em;max-width:16ch}
+.hero .lead{font-size:19px;font-weight:600;max-width:38ch}
+.hero .lead b{color:var(--on-hero)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;padding-top:4px}
+.cta{min-height:54px;border:0;border-radius:16px;background:var(--on-hero);color:var(--hero);font:800 17px/1 var(--body);padding:0 22px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;gap:10px}
+.cta.ghost{background:transparent;color:var(--on-hero);box-shadow:inset 0 0 0 2px var(--on-hero)}
+.cta svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));text-align:center;background:var(--surface);border-radius:var(--r);padding:16px 8px;gap:8px}
+.facts b{display:block;font-family:var(--display);font-weight:900;font-stretch:112%;font-size:32px;line-height:1;color:var(--ink)}
+.facts span{font-size:13px;color:var(--muted);line-height:1.3;display:block;margin-top:6px}
+
+/* Catálogo */
+.apps{display:grid;grid-template-columns:1fr;gap:12px}
+@media (min-width:640px){.apps{grid-template-columns:1fr 1fr}}
+.app{background:var(--surface);border-radius:var(--r);padding:22px 20px 20px;display:flex;flex-direction:column;gap:12px}
+.app.soon{background:transparent;border:2px dashed var(--line)}
+.app .st{align-self:flex-start;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px;border:2px solid var(--ink)}
+.app.soon .st{border-style:dashed;border-color:var(--muted);color:var(--muted)}
+.app h3{font-size:26px;font-weight:900;font-stretch:112%;letter-spacing:-.02em}
+.app p{font-size:16px}
+.app .src{font-size:14px;color:var(--muted);line-height:1.45}
+.app .src a{color:var(--ink)}
+.app .go{margin-top:auto;min-height:50px;border-radius:14px;background:var(--ink);color:var(--surface);font:800 16px/1 var(--body);display:inline-flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;padding:0 18px}
+.app .go svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+
+/* Principios */
+.plist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px;background:var(--surface);border-radius:var(--r);overflow:hidden;counter-reset:p}
+.plist li{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start;padding:18px 18px 16px}
+.plist li + li{border-top:1px solid var(--line)}
+.plist .n{font-family:var(--display);font-weight:900;font-stretch:112%;font-size:34px;line-height:.9;color:var(--ink);font-variant-numeric:tabular-nums;padding-top:2px}
+.plist b{display:block;font-family:var(--display);font-weight:800;font-size:20px;line-height:1.15;margin-bottom:4px}
+.plist p{font-size:15.5px;line-height:1.45}
+.plist .check{display:flex;gap:8px;align-items:flex-start;margin-top:8px;font-size:14px;color:var(--muted);line-height:1.4}
+.plist .check svg{width:18px;height:18px;flex:0 0 18px;stroke:var(--ink);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;margin-top:2px}
+
+/* Filtros */
+.filters{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:10px}
+@media (min-width:640px){.filters{grid-template-columns:1fr 1fr}}
+.filters li{background:var(--surface);border-radius:18px;padding:16px 16px 14px;display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start;font-size:15.5px;line-height:1.4}
+.filters li:last-child{grid-column:1 / -1}
+.filters svg{width:24px;height:24px;stroke:var(--ink);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;margin-top:1px}
+.filters b{display:block;font-family:var(--display);font-weight:800;font-size:18px;line-height:1.15;margin-bottom:2px}
+.filters span{color:var(--muted)}
+
+/* Líneas rojas */
+.red{background:var(--hero);color:var(--on-hero);border-radius:28px;padding:26px 24px;display:flex;flex-direction:column;gap:14px}
+.red h2{font-size:clamp(26px,6vw,32px)}
+.red ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.red li{display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start;font-size:17px;font-weight:600;line-height:1.4}
+.red li svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;margin-top:2px}
+.red .small{color:var(--on-hero-muted)}
+
+/* Quiénes somos */
+.who{display:flex;flex-direction:column;gap:14px;font-size:17px;max-width:62ch}
+.quote{background:var(--surface);border-left:6px solid var(--ink);border-radius:0 var(--r) var(--r) 0;padding:18px 20px;display:flex;flex-direction:column;gap:6px}
+.quote p:first-child{font-family:var(--display);font-weight:800;font-size:22px;line-height:1.15}
+
+/* Código y contacto */
+.cards2{display:grid;grid-template-columns:1fr;gap:12px}
+@media (min-width:640px){.cards2{grid-template-columns:1fr 1fr}}
+.card{background:var(--surface);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:10px}
+.card h3{font-size:22px}
+.card p{font-size:16px}
+.mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:15px;background:var(--tint);padding:2px 8px;border-radius:8px}
+
+/* Pie */
+footer{display:flex;flex-direction:column;gap:14px;padding-top:18px;border-top:2px solid var(--ink)}
+footer .wm{font-size:22px}
+footer p{font-size:14px;color:var(--muted)}
+.foot-row{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+.motto{font-family:var(--display);font-weight:800;font-size:18px;color:var(--ink)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="ut-mark" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="currentColor"/><path class="hole" transform="matrix(0.03213 0 0 -0.03213 7.408 51.468)" d="M130 292Q130 150 212.5 61Q295 -28 428 -28Q515 -28 619 25.5Q697.4 65.9 796.9 152.6Q809 101.9 845.5 61Q888.7 12.7 942.2 2.6Q1015.2 -28 1117 -28Q1227 -28 1313 13Q1399 54 1448 123.5Q1497 193 1497 278Q1497 312 1485 326Q1473 340 1453 340Q1429 340 1415 321Q1401 302 1388.5 277.5Q1376 253 1355.5 234Q1335 215 1297 215Q1250 215 1225 253Q1200 291 1200 364V822H1328Q1413 822 1450 848Q1487 874 1487 912Q1487 937 1468.5 950.5Q1450 964 1419 964H1200V1166Q1200 1202 1183.5 1221Q1167 1240 1138 1240Q1112 1240 1083.5 1224Q1055 1208 1022 1175L859 1010Q833 984 816.5 974Q800 964 781 964H776V970H774.8V964H639Q619.8 964 608.3 950.5Q596.8 937 596.8 912Q596.8 874 619.8 848Q642.7 822 695.4 822H774.8V700H775Q776 691.1 776 680V257.4Q757 244.9 735 237Q699 224 666 224Q613 224 583.5 256Q554 288 554 352V904Q554 943 530 968.5Q506 994 458 994Q434 994 403 985.5Q372 977 318 956L96 870Q60 856 47 842Q34 828 34 804Q34 784 43.5 771Q53 758 74 751L96 744Q113 739 121.5 725.5Q127 716.7 129 700Q130 691.1 130 680Z"/></symbol></svg>
+<a class="skip" href="#apps">Saltar al contenido</a>
+<div class="wrap">
+
+<header class="top">
+  <a class="wm" href="/" aria-label="unoparatodos, inicio">
+    <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#ut-mark"/></svg>
+    <span><span class="u">uno</span><span class="pt">paratodos</span></span>
+  </a>
+  <nav aria-label="Secciones">
+    <a href="#apps">Apps</a>
+    <a href="#principios">Principios</a>
+    <a href="#quienes">Quiénes somos</a>
+    <a href="#codigo">Código</a>
+  </nav>
+</header>
+
+<section class="hero" aria-labelledby="h1">
+  <p class="eyebrow">Gratis · Sin anuncios · Sin rastro</p>
+  <h1 id="h1">Datos públicos, en tu mano, en menos de un minuto.</h1>
+  <p class="lead">Pequeñas herramientas web para decidir con la información oficial delante. <b>Cada dato enlaza a su fuente. Ninguna decide por ti.</b></p>
+  <div class="actions">
+    <a class="cta" href="#apps">Ver las apps <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="cta ghost" href="#principios">Los siete principios</a>
+  </div>
+</section>
+
+<div class="facts" role="list" aria-label="En cifras">
+  <div role="listitem"><b>2</b><span>apps publicadas</span></div>
+  <div role="listitem"><b>0</b><span>anuncios, cookies y registros</span></div>
+  <div role="listitem"><b>0 €</b><span>para quien las usa</span></div>
+</div>
+
+<section id="apps" aria-labelledby="h-apps">
+  <div class="sec-h">
+    <h2 id="h-apps">Las apps</h2>
+    <p>Cada una resuelve una pregunta concreta con datos oficiales y dice de qué fecha son.</p>
+  </div>
+  <div class="apps">
+    <article class="app">
+      <span class="st">Disponible</span>
+      <h3>ATRÉVETE 29-N</h3>
+      <p>Quince preguntas sobre votaciones reales del Congreso para ver con qué partido coincides de verdad: con lo que votaron, no con lo que dicen. El voto es secreto y las respuestas no salen de tu móvil.</p>
+      <p class="src">Datos: <a href="https://www.congreso.es/es/opendata" rel="noopener">datos abiertos del Congreso de los Diputados</a>, acta de cada votación enlazada.</p>
+      <a class="go" href="https://atrevete29n.netlify.app/" rel="noopener">Abrir ATRÉVETE 29-N <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+    </article>
+    <article class="app">
+      <span class="st">Disponible</span>
+      <h3>CheapFuel</h3>
+      <p>Dónde repostar más barato cerca de ti o a lo largo de tu trayecto, sin desviarte más de lo que elijas. Precios oficiales de todas las gasolineras de España, con su fecha y hora.</p>
+      <p class="src">Datos: <a href="https://geoportalgasolineras.es/" rel="noopener">Geoportal de Gasolineras</a>, Ministerio para la Transición Ecológica y el Reto Demográfico.</p>
+      <a class="go" href="https://cheapfuel.netlify.app/" rel="noopener">Abrir CheapFuel <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+    </article>
+    <article class="app soon">
+      <span class="st">En estudio · 2027</span>
+      <h3>¿Pago un alquiler justo?</h3>
+      <p>Comparar tu alquiler con el índice de referencia oficial de tu zona. Se hará solo si pasa los cinco filtros de abajo.</p>
+      <p class="src">Datos previstos: Sistema Estatal de Referencia del Precio del Alquiler, Ministerio de Vivienda y Agenda Urbana.</p>
+    </article>
+  </div>
+</section>
+
+<section id="principios" aria-labelledby="h-pri">
+  <div class="sec-h">
+    <h2 id="h-pri">Siete principios que puedes comprobar</h2>
+    <p>No pedimos confianza: cada principio lleva una forma de verificarlo.</p>
+  </div>
+  <ol class="plist">
+    <li><span class="n">1</span><div><b>Gratis de verdad</b><p>Sin pago, sin anuncios, sin registro. Ni versión «premium» ni «gratis a cambio de tus datos».</p><div class="check"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Compruébalo: no hay pasarela de pago ni formulario de alta en ninguna app.</span></div></div></li>
+    <li><span class="n">2</span><div><b>Sin rastro</b><p>Sin cookies de seguimiento ni datos personales. Lo que respondes o registras se queda en tu dispositivo. Como mucho, un contador de visitas agregado sin cookies (Umami), y se indica en la app que lo use.</p><div class="check"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Compruébalo: abre las herramientas de tu navegador; no hay cookies ni peticiones a redes publicitarias.</span></div></div></li>
+    <li><span class="n">3</span><div><b>Fuentes citadas</b><p>Cada dato enlaza a su documento oficial y lleva fecha. Si el dato cambia, la app lo dice.</p><div class="check"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Compruébalo: sigue cualquier enlace de una app; llega a la fuente original, no a un resumen.</span></div></div></li>
+    <li><span class="n">4</span><div><b>Código abierto</b><p>El código de cada app es público: se puede leer, revisar, copiar y mejorar.</p><div class="check"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Compruébalo: los repositorios están enlazados al pie de esta página.</span></div></div></li>
+    <li><span class="n">5</span><div><b>No decide por ti</b><p>Mostramos los datos y cómo se calculan. La conclusión es tuya. Sin recomendaciones, sin ránkings opacos, sin «la mejor opción para ti».</p><div class="check"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Compruébalo: toda puntuación o cálculo tiene su explicación a un toque.</span></div></div></li>
+    <li><span class="n">6</span><div><b>Útil desde el móvil en segundos</b><p>Sin instalar nada ni crear cuentas. Si una app tarda más de un minuto en servir, no está bien hecha.</p><div class="check"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Compruébalo: cronométralo.</span></div></div></li>
+    <li><span class="n">7</span><div><b>Mantenida o retirada</b><p>Una app con datos viejos engaña. Cada una muestra la fecha de sus datos; si no podemos mantenerla, se retira con aviso en vez de dejarla morir.</p><div class="check"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Compruébalo: la fecha de los datos está a la vista en cada app.</span></div></div></li>
+  </ol>
+</section>
+
+<section id="filtros" aria-labelledby="h-fil">
+  <div class="sec-h">
+    <h2 id="h-fil">Qué app merece hacerse</h2>
+    <p>Una idea solo pasa a app si cumple los cinco filtros. Si no, no se hace.</p>
+  </div>
+  <ul class="filters">
+    <li><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><div><b>Afecta a mucha gente</b><span>No a un nicho ni a una afición.</span></div></li>
+    <li><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 10h16M10 4v16"/></svg><div><b>Hay datos públicos fiables</b><span>Oficiales, actualizados y reutilizables.</span></div></li>
+    <li><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg><div><b>Se usa en menos de un minuto</b><span>Una pregunta, una respuesta.</span></div></li>
+    <li><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0 5 5l-9.4 9.4a2.1 2.1 0 0 1-3-3l9.4-9.4z"/><path d="M19.7 11.3 21 10a4 4 0 0 0-6.3-4.7"/></svg><div><b>Se mantiene con un par de horas al mes</b><span>Si exige más, no es sostenible.</span></div></li>
+    <li><svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="9"/></svg><div><b>Aporta algo que no haga ya otra herramienta gratuita</b><span>Si existe y funciona, enlazamos a ella y no la repetimos.</span></div></li>
+  </ul>
+</section>
+
+<section class="red" aria-labelledby="h-red">
+  <h2 id="h-red">Líneas rojas</h2>
+  <ul>
+    <li><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg><span>Sin publicidad ni venta de datos, nunca.</span></li>
+    <li><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg><span>Sin dinero de partidos, fundaciones de partido, sindicatos ni patronales.</span></li>
+    <li><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg><span>Sin patrocinios de quien tenga interés en el tema de una app.</span></li>
+  </ul>
+  <p class="small">Si algún día hay un botón de apoyo voluntario, será eso: voluntario, sin contrapartidas y con las cuentas publicadas.</p>
+</section>
+
+<section id="quienes" aria-labelledby="h-who">
+  <div class="sec-h">
+    <h2 id="h-who">Quiénes somos</h2>
+  </div>
+  <div class="who">
+    <p>unoparatodos es un proyecto personal, hecho en tiempo libre desde Valencia. No hay empresa ni asociación detrás, ni ingresos, ni inversión que devolver.</p>
+    <p>No aparece ningún nombre a propósito. La marca no tiene cara: tiene métodos, y son los siete principios de arriba. Si se incumplen, da igual quién firme.</p>
+    <div class="quote">
+      <p>Uno para todos, todos para uno.</p>
+      <p class="muted">Uno para todos: quien construye las herramientas y las regala. Todos para uno: la comunidad que las revisa, las corrige y las comparte.</p>
+    </div>
+  </div>
+</section>
+
+<section id="codigo" aria-labelledby="h-code">
+  <div class="sec-h">
+    <h2 id="h-code">Código abierto y contacto</h2>
+  </div>
+  <div class="cards2">
+    <div class="card">
+      <h3>Repositorios</h3>
+      <p>El código de cada app se publica con licencia libre. Puedes revisarlo, señalar errores y proponer cambios.</p>
+      <p class="small muted">Repositorios públicos en preparación; el enlace aparecerá aquí antes del 29 de noviembre de 2026.</p>
+    </div>
+    <div class="card">
+      <h3>Contacto</h3>
+      <p>Errores, datos desactualizados, ideas que pasen los cinco filtros o ganas de colaborar.</p>
+      <p><a href="mailto:unoparatodos.app@proton.me">unoparatodos.app@proton.me</a></p>
+      <p class="small muted">Buzón de la marca, sin nombres detrás. Respondemos cuando podemos: esto se hace en tiempo libre.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-row">
+    <a class="wm" href="/" aria-label="unoparatodos">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#ut-mark"/></svg>
+      <span><span class="u">uno</span><span class="pt">paratodos</span></span>
+    </a>
+    <span class="motto">Uno para todos, todos para uno.</span>
+  </div>
+  <p>© 2026 unoparatodos · Esta página no usa cookies ni carga nada de terceros. Última revisión: 14 de octubre de 2026.</p>
+</footer>
+
+</div>
+</body>
+</html>
